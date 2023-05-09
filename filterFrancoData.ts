@@ -24,12 +24,11 @@ export const filterFrancoData = async (): Promise<void> => {
   const { error } = await supabase.rpc("truncate_franco_data", {});
 
   if (error) {
-    console.log(error);
-    return;
+    return error;
   }
 
   if (data_list == null) {
-    return;
+    return "Data_list is null!";
   }
 
   const records_viewed: Record[] = [];
@@ -95,8 +94,7 @@ export const filterFrancoData = async (): Promise<void> => {
     .insert(new_records);
 
   if (insertError) {
-    console.log(insertError);
-    return;
+    return insertError;
   }
 };
 
